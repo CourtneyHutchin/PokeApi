@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace PokeApiCore
         /// <exception cref="HttpRequestException"></exception>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<string> GetPokemonByName(string name)
+        public async Task<Pokemon> GetPokemonByName(string name)
         {
             try
             {
@@ -27,7 +28,7 @@ namespace PokeApiCore
                 HttpResponseMessage response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
                 string responseBody = await response.Content.ReadAsStringAsync();
-                return responseBody;
+                return JsonConvert.DeserializeObject<Pokemon>(responseBody);
             }
             catch(HttpRequestException ex)
             {
