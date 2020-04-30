@@ -1,8 +1,25 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model PokedexEntryViewModel
+@{
+	ViewData["Title"] = "Pokedex Entry for " + Model.Name;
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Pokedex Entry</h2>
+
+<img src="@Model.PokedexImageUrl" alt="Picture of @Model.Name" />
+
+<h3>@Model.Name</h3>
+<p>
+	Weight: @Model.Weight<br />
+	Height: @Model.Height<br />
+</p>
+
+<h4>Move List</h4>
+<ul>
+	@foreach (string move in Model.MoveList)
+	{
+		<li>@move</li>
+	}
+</ul>
+
+<button>Prev</button>
+<button>Next</button>
