@@ -13,7 +13,7 @@ namespace PokeApiCore
         private const double InchesPerDecimetre = 3.937;
         private int height1;
 
-        public int id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         /// <summary>
         /// The base experience gained for defeating this Pokemon.
@@ -41,7 +41,7 @@ namespace PokeApiCore
         public string location_area_encounters { get; set; }
         public Move[] moves { get; set; }
         public Species species { get; set; }
-        public Sprites sprites { get; set; }
+        public Sprites Sprites { get; set; }
         public Stat[] stats { get; set; }
         public Type[] types { get; set; }
     }

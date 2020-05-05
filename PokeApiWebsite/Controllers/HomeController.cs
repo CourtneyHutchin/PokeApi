@@ -35,14 +35,16 @@ namespace PokeApiWebsite.Controllers
             // Refactor property names
             var entry = new PokedexEntryViewModel()
             {
-                Id = result.id,
+                Id = result.Id,
                 Name = result.Name,
                 Height = result.Height.ToString(),
                 Weight = result.Weight.ToString(),
-                PokedexImageUrl = result.sprites.FrontDefault,
+                PokedexImageUrl = result.Sprites.FrontDefault,
                 MoveList = resultMoves
             };
 
+            // Set First letter to uppercase
+            entry.Name = entry.Name.FirstCharToUpper();
 
             return View(entry);
         }
