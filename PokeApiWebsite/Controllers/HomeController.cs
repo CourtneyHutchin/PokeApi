@@ -21,16 +21,9 @@ namespace PokeApiWebsite.Controllers
 
         public async Task<IActionResult> Index()
         {
-            PokeApiClient myClient = new PokeApiClient();
-            Pokemon result = await myClient.GetPokemonById(1);
+            int desiredId = 1;
 
-            List<string> resultMoves = new List<string>();
-            foreach(Move currMove in result.moves)
-            {
-                resultMoves.Add(currMove.move.name);
-            }
-
-            resultMoves.Sort();
+            Pokemon result = await PokeAPIHelper.GetById(desiredId);
 
             // Refactor property names
             var entry = new PokedexEntryViewModel()
@@ -40,7 +33,10 @@ namespace PokeApiWebsite.Controllers
                 Height = result.Height.ToString(),
                 Weight = result.Weight.ToString(),
                 PokedexImageUrl = result.Sprites.FrontDefault,
-                MoveList = resultMoves
+                MoveList = result.moves
+                    .OrderBy(m => m.move.name)
+                    .Select(m => m.move.name)
+                    .ToArray()
             };
 
             // Set First letter to uppercase
