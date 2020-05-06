@@ -1,0 +1,32 @@
+﻿@model PokedexEntryViewModel
+@{
+	ViewData["Title"] = "Pokedex Entry for " + Model.Name;
+}
+
+<h2>Pokedex Entry</h2>
+
+<img src="@Model.PokedexImageUrl" alt="Picture of @Model.Name" />
+
+<h3>@Model.Name</h3>
+<p>
+	Weight: @Model.Weight<br />
+	Height: @Model.Height<br />
+</p>
+
+<h4>Move List</h4>
+<ul>
+	@foreach (string move in Model.MoveList)
+	{
+		<li>@move</li>
+	}
+</ul>
+
+@{
+	int prevPage = Convert.ToInt32(ViewData["Id"]) - 1;
+	int nextPage = Convert.ToInt32(ViewData["Id"]) + 1;
+}
+@if (prevPage >= 1)
+{
+	<a asp-action="Index" asp-route-id="@prevPage" class="btn btn-primary">Prev</a>
+}
+<a asp-action="Index" asp-route-id="@nextPage" class="btn btn-primary">Next</a>
