@@ -24,5 +24,27 @@ namespace PokeApiWebsite.Models
 
             return result;
         }
+
+        public static PokedexEntryViewModel GetPokedexEntryFromPokemon(Pokemon result)
+        {
+            // Refactor property names
+            var entry = new PokedexEntryViewModel()
+            {
+                Id = result.Id,
+                Name = result.Name,
+                Height = result.Height.ToString(),
+                Weight = result.Weight.ToString(),
+                PokedexImageUrl = result.Sprites.FrontDefault,
+                MoveList = result.moves
+                    .OrderBy(m => m.move.name)
+                    .Select(m => m.move.name)
+                    .ToArray()
+            };
+
+            // Set First letter to uppercase
+            entry.Name = entry.Name.FirstCharToUpper();
+            return entry;
+        }
+
     }
 }

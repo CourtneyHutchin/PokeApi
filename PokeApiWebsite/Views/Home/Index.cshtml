@@ -21,5 +21,12 @@
 	}
 </ul>
 
-<button>Prev</button>
-<button>Next</button>
+@{
+	int prevPage = Convert.ToInt32(ViewData["Id"]) - 1;
+	int nextPage = Convert.ToInt32(ViewData["Id"]) + 1;
+}
+@if (prevPage >= 1)
+{
+	<a asp-action="Index" asp-route-id="@prevPage" class="btn btn-primary">Prev</a>
+}
+<a asp-action="Index" asp-route-id="@nextPage" class="btn btn-primary">Next</a>
